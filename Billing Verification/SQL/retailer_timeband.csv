@@ -1,9 +1,9 @@
 Retailer,State,Peak1_Start,Peak1_End,Peak2_Start,Peak2_End,Shoulder1_Start,Shoulder1_End,Shoulder2_Start,Shoulder2_End,Off-Peak1_Start,Off-Peak1_End,Off-Peak2_Start,Off-Peak2_End,Week_Start,Week_End
-AGL,NSW,7:00, 09:00,17:00, 20:00,9:00, 17:00,20:00,22:00,22:00, 00:00 ,0:00,7:00,1,5
+AGL,NSW,7:00,9:00,17:00,20:00,9:00,17:00,20:00,22:00,22:00,0:00 ,0:00,7:00,1,5
 AGL,QLD,,,,,,,,,,,,,,
 AGL,SA,,,,,,,,,,,,,,
 AGL,VIC,,,,,,,,,,,,,,
-Origin,NSW,7:00, 09:00,17:00, 20:00,9:00, 17:00,20:00,22:00,22:00, 00:00 ,0:00,7:00,1,5
-Origin,QLD,,,,,,,,,,,,,,
+Origin,NSW,7:00,9:00,17:00,20:00,9:00,17:00,20:00,22:00,22:00,0:00 ,0:00,7:00,1,5
+Origin,QLD,7:00,9:00,17:00,20:00,,,20:00,22:00,22:00,0:00 ,0:00,7:00,1,5
 Origin,SA,,,,,,,,,,,,,,
 Origin,VIC,,,,,,,,,,,,,,
