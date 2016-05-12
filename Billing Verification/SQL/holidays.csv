@@ -1,25 +1,25 @@
 State,Target,Date,Event
-NSW,Network,1/01/2016,New Years Day
-NSW,Network,26/01/2016,Australia Day 
-NSW,Network,25/03/2016,Good Friday
-NSW,Network,26/03/2016,Easter Saturday
-NSW,Network,27/03/2016,Easter Sunday
-NSW,Network,28/03/2016,Easter Monday
-NSW,Network,25/04/2016,Anzac Day
-NSW,Network,13/06/2016,Queens Birthday
-NSW,Network,3/10/2016,Labour Day
-NSW,Network,25/12/2016,Christmas Day
-NSW,Network,26/12/2016,Boxing Day
-NSW,Network,27/12/2016,Christmas/Boxing Day Holiday
-NSW,Retailer,1/01/2016,New Years Day
-NSW,Retailer,26/01/2016,Australia Day 
-NSW,Retailer,25/03/2016,Good Friday
-NSW,Retailer,26/03/2016,Easter Saturday
-NSW,Retailer,27/03/2016,Easter Sunday
-NSW,Retailer,28/03/2016,Easter Monday
-NSW,Retailer,25/04/2016,Anzac Day
-NSW,Retailer,13/06/2016,Queens Birthday
-NSW,Retailer,3/10/2016,Labour Day
-NSW,Retailer,25/12/2016,Christmas Day
-NSW,Retailer,26/12/2016,Boxing Day
-NSW,Retailer,27/12/2016,Christmas/Boxing Day Holiday
+NSW,Network,2016-01-01,New Years Day
+NSW,Network,2016-01-26,Australia Day 
+NSW,Network,2016-03-25,Good Friday
+NSW,Network,2016-03-26,Easter Saturday
+NSW,Network,2016-03-27,Easter Sunday
+NSW,Network,2016-03-28,Easter Monday
+NSW,Network,2016-04-25,Anzac Day
+NSW,Network,2016-06-13,Queens Birthday
+NSW,Network,2016-10-03,Labour Day
+NSW,Network,2016-12-25,Christmas Day
+NSW,Network,2016-12-26,Boxing Day
+NSW,Network,2016-12-27,Christmas/Boxing Day Holiday
+NSW,Retailer,2016-01-01,New Years Day
+NSW,Retailer,2016-01-26,Australia Day 
+NSW,Retailer,2016-03-25,Good Friday
+NSW,Retailer,2016-03-26,Easter Saturday
+NSW,Retailer,2016-03-27,Easter Sunday
+NSW,Retailer,2016-03-28,Easter Monday
+NSW,Retailer,2016-04-25,Anzac Day
+NSW,Retailer,2016-06-13,Queens Birthday
+NSW,Retailer,2016-10-03,Labour Day
+NSW,Retailer,2016-12-25,Christmas Day
+NSW,Retailer,2016-12-26,Boxing Day
+NSW,Retailer,2016-12-27,Christmas/Boxing Day Holiday
