@@ -1,9 +1,13 @@
 library(ggplot2)
 library(reshape2)
+library(scales)
+library(cluster) 
 
-path = "C:/Users/rfzheng/Desktop/Udacity/R/average_usage"
+#path = "C:/Users/rfzheng/Desktop/Udacity/R/average_usage"
+path = "C:/Users/Ricky/Desktop/Eutility_Dev/R/R/average_usage"
 target_col = "kWh"
 index_col = "Time"
+chart_color = "#18334e"
 setwd(path)
 
 
@@ -34,7 +38,7 @@ parse_file <- function(index, f_name){
     
   }
   #normalise dataset
-  db_all[[f_name]] <<- norm(db[,f_name])
+  db_all[[rename_file(f_name)]] <<- norm(db[,rename_file(f_name)])
   return(db_all)
 }
 
@@ -46,7 +50,7 @@ fetch_data <-function(f_name){
   db <- aggregate(db_raw[, index_Time], dic_db, mean)
   #rename fetched database
   colnames(db)[1] <- index_col
-  colnames(db)[2] <- f_name
+  colnames(db)[2] <- rename_file(f_name)
   #sort data by on index
   db <- db[order(db$Time),]
   return(db)
@@ -56,24 +60,36 @@ fetch_data <-function(f_name){
 # normlise data in percentage format
 norm <- function(col_val){
   db_sum = sum(col_val)
-  col_val / db_sum
+  val = col_val / db_sum * 100
+  #format(round(val, 2))
 }
 
 # Plot graph
 draw_graph <- function(){
   db_tran <- melt(db_all, id.vars=index_col)
-  ggplot(db_tran, aes(db_tran[,index_col],value, col=variable), geom = "line") +
-    geom_point()
+  
+  ggplot(db_tran, aes(db_tran[,index_col],value, col=variable, group = variable)) +
+    geom_line(colour=chart_color) +
+    #geom_point(colour=chart_color) + 
+    labs(list(title = "Average Daily Usage", x = "Time", y = "Proportion of Usage in Each Hour (%)"))+
+    theme(axis.text.x = element_text(angle=90, vjust=0.5))
+    
+    
+    
 }
  
-#extract file name
+#extract file name and rename it
 rename_file <- function(f_name){
-  
-  return(result)
+  preName = "nmi"
+  joinPart = "_"
+  nmi = substr(f_name, 1, 10)
+  new_name = paste(preName, nmi, sep = joinPart)
+  return(new_name)
 }
 
 main()
 draw_graph()
+
 
 
 
