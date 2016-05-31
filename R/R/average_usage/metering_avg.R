@@ -3,12 +3,21 @@ library(reshape2)
 library(scales)
 library(cluster) 
 
-#path = "C:/Users/rfzheng/Desktop/Udacity/R/average_usage"
-path = "C:/Users/Ricky/Desktop/Eutility_Dev/R/R/average_usage"
+path = "C:/Users/rfzheng/Desktop/R/R/average_usage"
+#path = "C:/Users/Ricky/Desktop/Eutility_Dev/R/R/average_usage"
+
 target_col = "kWh"
 index_col = "Time"
 chart_color = "#18334e"
+kMean_lines = 3
+kMean_lineSize = 2
 setwd(path)
+#maximise printing output result
+options(max.print=1000000)
+
+# True for show cluster Curve, otherwise hide
+add_cluster_Curve = TRUE
+
 
 
 #loop through all csv files in the given path
@@ -53,6 +62,7 @@ fetch_data <-function(f_name){
   colnames(db)[2] <- rename_file(f_name)
   #sort data by on index
   db <- db[order(db$Time),]
+  print(f_name)
   return(db)
 }
 
@@ -66,16 +76,33 @@ norm <- function(col_val){
 
 # Plot graph
 draw_graph <- function(){
-  db_tran <- melt(db_all, id.vars=index_col)
-  
-  ggplot(db_tran, aes(db_tran[,index_col],value, col=variable, group = variable)) +
+  db_tran <- reshapeData(db_all)
+
+  pltbase <- ggplot(db_tran, aes(db_tran[,index_col],value, col=variable, group = variable)) +
     geom_line(colour=chart_color) +
     #geom_point(colour=chart_color) + 
     labs(list(title = "Average Daily Usage", x = "Time", y = "Proportion of Usage in Each Hour (%)"))+
     theme(axis.text.x = element_text(angle=90, vjust=0.5))
+
+  
+  
+  #shown cluster curve if true
+  if(add_cluster_Curve){
+    cluster_db = reshapeData(Main_Cluster(db_all))
+    # add cluster curves
+    db = cluster_db
+    pltbase + geom_line(data=db, aes(db[,index_col],value, col=variable, group = variable), size = kMean_lineSize)
     
-    
-    
+  }else{
+    pltbase
+  }
+  
+}
+
+
+#reshape data
+reshapeData <- function(data){
+  db_tran <- melt(data, id.vars=index_col)
 }
  
 #extract file name and rename it
@@ -87,8 +114,49 @@ rename_file <- function(f_name){
   return(new_name)
 }
 
+
+#Cluster_centers
+kCluster <-function(data){
+  cl <- kmeans(data, kMean_lines)
+  return(cl$centers)
+}
+
+strip_data <- function(data){
+  return(as.numeric(data[1,]))
+}
+
+#Cluster_transpose
+#Main Cluster
+Main_Cluster <- function(data){
+  #loop for each row of data
+  clt_data = data.frame(db_all$Time)
+  colnames(clt_data) <- index_col
+  for(i in 1:nrow(data)){
+    #collect center points
+    row_db = data[i, ]
+    #skip the index col
+    raw_db = row_db[2:length(data)]
+    #strip data
+    stp_db = strip_data(raw_db)
+    #get cluster point
+    #print(kCluster(stp_db))
+    val_db = kCluster(stp_db)
+    
+    sort_db = sort(val_db)
+    for(j in 1:length(sort_db)){
+      # add one to shift from index column
+    
+      clt_data[i,j + 1] = sort_db[j]
+    }
+
+    
+  }
+  return(clt_data)
+}
+
 main()
 draw_graph()
+#Main_Cluster(db_all)
 
 
 
