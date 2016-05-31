@@ -3,13 +3,13 @@ library(reshape2)
 library(scales)
 library(cluster) 
 
-path = "C:/Users/rfzheng/Desktop/R/R/average_usage"
-#path = "C:/Users/Ricky/Desktop/Eutility_Dev/R/R/average_usage"
+#path = "C:/Users/rfzheng/Desktop/R/R/average_usage"
+path = "C:/Users/Ricky/Desktop/Eutility_Dev/R/R/average_usage"
 
 target_col = "kWh"
 index_col = "Time"
 chart_color = "#18334e"
-kMean_lines = 3
+kMean_lines = 2
 kMean_lineSize = 2
 setwd(path)
 #maximise printing output result
@@ -121,36 +121,23 @@ kCluster <-function(data){
   return(cl$centers)
 }
 
-strip_data <- function(data){
-  return(as.numeric(data[1,]))
-}
 
-#Cluster_transpose
 #Main Cluster
 Main_Cluster <- function(data){
-  #loop for each row of data
-  clt_data = data.frame(db_all$Time)
-  colnames(clt_data) <- index_col
-  for(i in 1:nrow(data)){
-    #collect center points
-    row_db = data[i, ]
-    #skip the index col
-    raw_db = row_db[2:length(data)]
-    #strip data
-    stp_db = strip_data(raw_db)
-    #get cluster point
-    #print(kCluster(stp_db))
-    val_db = kCluster(stp_db)
-    
-    sort_db = sort(val_db)
-    for(j in 1:length(sort_db)){
-      # add one to shift from index column
-    
-      clt_data[i,j + 1] = sort_db[j]
-    }
+  
+  
+  #parse data
+  db_temp = data[,2:length(data)]
+  
+  #transpose data and get time column
+  
+  t_db = t(db_temp)
+  Time = data[,index_col]
+  
+  #get cluster points
+  clt_data_t = kCluster(t_db)
+  clt_data = data.frame(Time, t(clt_data_t))
 
-    
-  }
   return(clt_data)
 }
 
